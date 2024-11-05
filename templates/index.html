@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Calculadora</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Escolha o Tipo</h1>
+        </header>
+        <main>
+            <div class="botao-container">
+                <button onclick="window.location.href='{{url_for('empresa_index') }}'" class="botao" aria-label="Ir para a seção Empresa">Empresa</button>
+                <button onclick="window.location.href='{{url_for('pessoa_index') }}'" class="botao" aria-label="Ir para a seção Pessoa">Pessoa</button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+
+
