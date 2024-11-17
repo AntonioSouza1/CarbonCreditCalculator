@@ -1,0 +1,72 @@
+#menu{
+    display: flex;
+    gap: 48px;
+    background-color: #ceffc9;
+}
+
+.title-menu{
+    margin-top: 1%;
+}
+
+.texto-menu{
+    align-items: center;
+    text-align: center;  
+}
+
+#empresa,
+#pessoa{
+    width: 50%;
+    left: 0;
+    margin-top: 2%;
+    background-color: #82ff74;
+    padding: 2%;
+    border-radius: 50px;    
+}
+
+.btn_menu{
+    align-items: center;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.banner_menu img{
+    margin-top: 3%;
+    position: relative;
+    width: 80%;
+    height: auto;
+    border-radius: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+    #menu{
+        min-height: 100%;
+        display: block;
+    }
+
+    .title-menu{
+        padding: 2%;
+        margin-top: 3%;
+        align-items: center;
+        text-align: center;
+    }
+
+    #empresa,
+    #pessoa{
+        width: 100%;
+        left: 0;
+        margin-top: 7%;
+        background-color: #82ff74;
+        padding: 3%;
+        border-radius: 50px;    
+    }
+
+    .banner_menu img{
+        display: none;
+    }
+
+    #btn_menu{
+        align-items: center;
+        text-align: center;
+        margin-top: 5%;
+    }
+}

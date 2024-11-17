@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: #ceffc9;
+}
+
+.title{
+    font-size: 30px;
+    color: #1d1d1d;
+}
+
+h2{
+    text-align: center;
+}
+
+#navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #a8fd9a;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 0;
+    height: auto;
+    z-index: 1000;
+    
+}
+
+#navbar .title span{
+    color: #15a600;
+}
+
+#title_form{
+    display: flex;
+    width: 35%;
+    font-size: 30px;
+    color: #1d1d1d;
+    margin: 2%;
+}
+
+#title_form span{
+    color: #15a600;
+}
+
+form{
+    display: flex;
+    margin-top: 7%;
+    justify-content: center;
+    gap: 10%;
+}
+
+.formulario {
+    position: relative;
+    background-color: #82ff74;
+    width: 45%;
+    padding: 2%;
+    border-radius: 14px;
+}
+
+.input{
+    display: flex;
+    gap: 30px;
+    margin-top: 1%;
+}
+
+.fornecimento,
+.comb{
+    width: auto;
+}
+
+
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+select {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px;
+    border: 1px solid #ceffc9;
+    border-radius: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #15a600;
+    outline: none;
+}
+
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.btn-default{
+    color: #ffffff;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    background-color: #15a600;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(0,0, 0, 0.1);
+    cursor: pointer;
+    transition: backgrond-color .3s ease;
+}
+.btn-default:hover{
+    background-color: #1dd800;
+}
+
+@media screen and (max-width: 1600px){
+    form{
+        display: block;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .formulario{
+        width: 96%;
+    }
+
+    #title_form{
+        width: 50%;
+        margin-top: 5%;
+    }
+
+    #navbar{
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 1300px){
+    form{
+        display: block;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .formulario{
+        width: 96%;
+    }
+
+    #title_form{
+        width: 70%;
+        margin-top: 7%;
+    }
+
+    #navbar{
+        text-align: center;
+    }
+}
+
+
+@media screen and (max-width: 550px){
+    form{
+        display: block;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .formulario{
+        width: 96%;
+    }
+
+    #title_form{
+        width: 97%;
+        margin-top: 20%;
+        text-align: center;
+    }
+
+    #navbar{
+        text-align: center;
+    }
+}

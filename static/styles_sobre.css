@@ -1,0 +1,45 @@
+#sobre{
+    display: flex;
+    background-color: #ceffc9;
+    align-items: center;
+}
+
+#text-sobre{
+    width: 500%;
+    left: 0;
+    padding: 2%;
+    margin-top: 2%;
+    gap: 48px;
+}
+
+h1{
+    margin-top: 1%;
+}
+
+p{
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+.banner_sobre img{
+    position: relative;
+    margin-top: 10%;
+    width: 100%;
+    height: auto;
+    border-radius: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+    #sobre{
+        min-height: 100%;
+    }
+    p{
+        font-size: 12.5px;
+    }
+}
+
+@media screen and (max-width: 1900px) {
+    .banner_sobre img{
+        display: none;
+    }
+}

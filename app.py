@@ -1,19 +1,14 @@
 from flask import *
 from dados import *
+from datetime import datetime
 import time
-app = Flask(__name__)
+import os
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-@app.route('/empresa')
-def empresa_index():
-    return render_template('/empresa/index.html')
-@app.route('/pessoa')
-def pessoa_index():
-    return render_template('/pessoa/index.html')
+dadosPessoa = {}
+dadosEmpresa = {}
 
-
+totalEmissao = []
+totalReducao = []
 
 def tratar_entrada(valor, tipo, valor_padrao):
     if valor.strip() == "":
@@ -27,30 +22,73 @@ def tratar_entrada(valor, tipo, valor_padrao):
             
     except ValueError:
         return int(valor_padrao)
+ 
+
+def salvar_dados(tipoCalculo, Remissao, Rcredito, Rreducao):
+    pasta = "Resultados"
+    os.makedirs(pasta, exist_ok=True)
+    if tipoCalculo == 1:
+        nome = dadosPessoa["nome"]
+    else:
+        nome = dadosEmpresa["nome"]
+    data = dadosPessoa["data"] 
+    nome_arquivo = (f"{nome}_{data}.txt") 
+    caminho = os.path.join(pasta, nome_arquivo)
+    with open(caminho, 'w') as arquivo:
+        arquivo.write(f"Dados\n")
+        if tipoCalculo == 1:
+            arquivo.write(f"Nome: {dadosPessoa['nome']}\n") 
+            arquivo.write(f"Endereço: {dadosPessoa['endereco']}\n") 
+            arquivo.write(f"telefone: {dadosPessoa['telefone']}\n")
+            arquivo.write(f"Ano Inventariado: {dadosPessoa['anoInventariado']}\n")
+            arquivo.write("\n")
+        else:
+            arquivo.write(f"Empresa: {dadosEmpresa['nome']}\n")
+            arquivo.write(f"Endereço: {dadosEmpresa['endereco']}\n")
+            arquivo.write(f"Nome do responsável: {dadosEmpresa['nomeResponsavel']}\n")
+            arquivo.write(f"Telefone do Responsável: {dadosEmpresa['telefoneResponsavel']}\n")
+            arquivo.write(f"Ano Inventariado: {dadosEmpresa['anoInventariado']}\n")
+            arquivo.write(f"Ramo Empresa: {dadosEmpresa['ramoEmpresa']}\n")
+            arquivo.write("\n")
+                          
+        arquivo.write(f'Total de emissão {Remissao}\n')
+        arquivo.write(f'Total de redução {Rreducao}\n')
+        arquivo.write(f'Total de credito {Rcredito}\n')
+        arquivo.write("\n")
+        arquivo.write(f'Data: {dadosPessoa['data']}') 
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+@app.route('/empresa')
+def empresa_index():
+    return render_template('/empresa/index.html')
+@app.route('/pessoa')
+def pessoa_index():
+    return render_template('/pessoa/index.html')
 
 @app.route('/calculo', methods=['POST'])
 def empresa():
-    #totais
-    totalEmissao = []
-    totalReducao = []
 
     tipoCalculo = int(request.form['tipo'])
     print(tipoCalculo) #teste
     if tipoCalculo == 1:
         print('Cadastrando pessoa')
-        dadosPessoa = {}
         dadosPessoa['nome'] = request.form['nome']
         dadosPessoa['endereco'] = request.form['endereco']
         dadosPessoa['telefone'] = request.form['telefone']
         anoInventario = int(request.form['ano_inventariado'])
+        dadosPessoa['data'] = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         if anoInventario == 0:
             dadosPessoa['anoInventariado'] = 'Ano não selecionado'
         else:
             dadosPessoa['anoInventariado'] = anoInventario
-    elif tipoCalculo == 2:
+        print()
+    else:
         # cadastro empresa
         print('Cadastrando empresa')
-        dadosEmpresa = {}
         dadosEmpresa['nome'] = request.form['nome_empresa'] # Entrada do nome da empresa via formulário
         dadosEmpresa['endereco'] = request.form["endereco_empresa"] # Entrada do endereço da empresa via formulário
         dadosEmpresa['nomeResponsavel'] = request.form['nomeResponsavel_empresa'] # Entrada do nome do responsável pela empresa via formulário
@@ -247,17 +285,18 @@ def empresa():
     totalReducao.append((Reflorestamento * reducao['Reflorestamento']) / 1000)
 
     #retorno
-    print('Enviando dados aguarde...')
+    print('Salvando dados aguarde...')
     Remissao = (f'{sum(totalEmissao):.2f}')
     Rcredito = (f'{sum(totalReducao):.2f}')
-    Reducao = (sum(totalEmissao) - sum(totalReducao))
+    Rreducao = (f'{sum(totalEmissao) - sum(totalReducao):.2f}')
+    salvar_dados(tipoCalculo, Remissao, Rcredito, Rreducao)
     if tipoCalculo == 1:
         return render_template('/pessoa/result/index.html',
                                nome=dadosPessoa['nome'],
                                endereco_empresa=dadosPessoa['endereco'],
                                telefone=dadosPessoa['telefone'],
                                ano_inventariado=dadosPessoa['anoInventariado'],
-                               Remissao=Remissao, Reducao=Reducao, Rcredito=Rcredito)
+                               Remissao=Remissao, Reducao=Rreducao, Rcredito=Rcredito)
 
     elif tipoCalculo == 2:
         return render_template('/empresa/result/index.html',
@@ -267,7 +306,7 @@ def empresa():
                                telefoneResponsavel_empresa=dadosEmpresa['telefoneResponsavel'],
                                ano_inventariado=dadosEmpresa['anoInventariado'],
                                ramo_empresa=dadosEmpresa['ramoEmpresa'],
-                               Remissao=Remissao, Reducao=(f'{Reducao:.2f}'), Rcredito=Rcredito)
+                               Remissao=Remissao, Reducao=(f'{Rreducao:.2f}'), Rcredito=Rcredito)
 
 if __name__ == '__main__':
     app.run(debug=True)

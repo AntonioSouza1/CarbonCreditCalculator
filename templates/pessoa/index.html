@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/pessoa/style.css">
+    <title>Calculadora Pessoa</title>
+</head>
+<body>
+    <div id="navbar">
+        <h1 class="title">Calculadora de Crédito de
+            <span>Carbono</span>
+        </h1>
+    </div>
+    <form action="/calculo" method="post">
+        <div id="title_form">
+            <div>
+                <h1>Formulário de crédito de 
+                    <span>Carbono</span>
+                </h1>
+                <h2>Para pessoas</h2>
+            </div>
+        </div>
+        <div class="formulario">
+            <h2>Dados da Pessoas</h2>
+            <div id="dados_pessoais">
+                <div>
+                    <input type="hidden" id="tipo" name="tipo" value="1">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome"
+                        placeholder="Nome" required>
+                </div>
+                <div>
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco"
+                       placeholder="Endereço" required>
+                </div>
+                <div class="input" id="input_tel_ano">
+                    <div>
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" name="telefone"
+                            placeholder="(11) 11111-1111" >
+                    </div>
+                    <div>
+                        <label for="ano_inventariado">Ano Inventariado: </label>
+                        <select name="ano_inventariado" id="ano_inventariado">
+                            <option value="0">selecione o ano inventariado</option>
+                            <option value="2023">1 - 2023</option>
+                            <option value="2022">2 - 2022</option>
+                            <option value="2021">3 - 2021</option>
+                            <option value="2020">4 - 2020</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2>Entrada de dados</h2>
+                <h3>Energia (KW/h)</h3>
+                <div class="input">
+                    <div class="fornecimento">
+                        <label>Selecione o tipo de fornecimento</label>
+                        <select name="tpFornecimento" id="tpFornecimento" onchange="OcultaEnergia()">
+                            <option value="0">Selecione um tipo de fornecimento</option>
+                            <option value="1">1 - Carvão</option>
+                            <option value="2">2 - Gás Natural</option>
+                            <option value="3">3 - Petróleo</option>
+                            <option value="4">4 - Nuclear</option>
+                            <option value="5">5 - Renovável</option>
+                        </select>
+                    </div>
+                    <div class="fornecimento">
+                        <label id="txEnCarvao" class="hidden">Carvão:</label>
+                        <input type="number" id="enCarvao" name="enCarvao" class="hidden"
+                               placeholder="Gasto de energia por mês(kw/h)">
+
+                        <label id="txEnGasnatural" class="hidden">Gás Natural:</label>
+                        <input type="number" id="enGasnatural" name="enGasnatural" class="hidden"
+                            placeholder="Gasto de energia por mês(kw/h)">
+
+                        <label id="txEnPetroleo" class="hidden">Petróleo:</label>
+                        <input type="number" id="enPetroleo" name="enPetroleo" class="hidden"
+                               placeholder="Gasto de energia por mês(kw/h)">
+
+                        <label id="txEnNuclear" class="hidden">Nuclear:</label>
+                        <input type="number" id="enNuclear" name="enNuclear" class="hidden"
+                               placeholder="Gasto de energia por mês(kw/h)">
+
+                        <label id="txEnRenovavel" class="hidden">Renovável:</label>
+                        <input type="number" id="enRenovavel" name="enRenovavel" class="hidden"
+                               placeholder="Gasto de energia por mês(kw/h)">
+                    </div>
+                </div>
+                <div>
+                    <h3>Veículos Automotores </h3>
+                    <label type="text" id="ckeckComb" class="comb">Selecione o tipos de combustível</label>
+                    <div>                    
+                        <input type="checkbox" id="checkGasolina" onclick="toggleGasolina()">Gasolina
+                        <div class="input">
+                            <div class="comb">
+                                <label for="gasolina" id="txGasolina" class="comb">Consumo de Gasolina (L)</label>
+                                <input type="number" id="gasolina" name="gasolina"
+                                    placeholder="Média mensal (L)">
+                            </div>
+                            <div class="comb">
+                                <label for="tx_qtGasolina" id="tx_qtGasolina" class="comb">Qtd de veículos (Gasolina)</label>
+                                <input type="number" id="qtGasolina" name="qtGasolina"
+                                    placeholder="Qtd de veículos" >
+                            </div>
+                        </div>
+                        <input type="checkbox" id="checkEtanol" onclick="toggleEtanol()">Etanol
+                        <div class="input">
+                            <div class="comb">
+                                <label for="etanol" id="txEtanol" class="comb">Consumo de Etanol (L):</label>
+                                <input type="number" id="etanol" name="etanol"
+                                    placeholder="Média mensal (L)">
+                            </div>
+                            <div class="comb">
+                                <label for="tx_qtEtanol" id="tx_qtEtanol" class="comb">Qtd de veículos (Etanol)</label>
+                                <input type="number" id="qtEtanol" name="qtEtanol"
+                                    placeholder="Qtd de veículos">
+                            </div>
+                        </div>
+                        <input type="checkbox" id="checkDiesel" onclick="toggleDiesel()">Diesel
+                        <div class="input">
+                            <div class="comb">
+                                <label for="diesel" id="txDiesel" class="comb">consumo de Diesel (L):</label>
+                                <input type="number" id="diesel" name="diesel"
+                                    placeholder="Média mensal (L)">
+                            </div>
+                            <div class="comb">
+                                <label for="tx_qtDiesel" id="tx_qtDiesel" class="comb">Qtd de veículos (Diesel)</label>
+                                <input type="number" id="qtDiesel" name="qtDiesel"
+                                    placeholder="Qtd de veículos">
+                            </div>
+                        </div>
+                        <input type="checkbox" id="checkBiodiesel" onclick="toggleBiodiesel()">BioDiesel
+                        <div class="input">
+                            <div class="comb">
+                                <label for="biodiesel" id="txBiodiesel" class="comb">Consumo de BioDiesel (L)</label>
+                                <input type="number" id="biodiesel" name="biodiesel"
+                                    placeholder="Média mensal (L)">
+                            </div>
+                            <div class="comb">
+                                <label for="tx_qtBioiesel" id="tx_qtBiodiesel" class="comb">Qtd de veículos (Biodiesel)</label>
+                                <input type="number" id="qtBiodiesel" name="qtBiodiesel"
+                                    placeholder="Qtd de veículos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="ar" class='arCondicionado'>
+                    <h3>Uso de Ar Condicionado</h3>
+                    <label type="text" id="ckeckComb" class="comb">Seleciona os tipos de Ar Condicionado de sua casa</label>                       
+                    <div>
+                        <input type="checkbox" id="checkArPequeno" onclick="toggleArPequeno()">Pequeno
+                        <label for="arP" id="txarP">Ar condicionado (pequeno)</label>
+                        <div class="input">
+                            <div>
+                                <input type="number" id="arP" name="arP" 
+                                    placeholder="Qtd por dia (Horas)">
+                            </div>
+                            <div>  
+                                <input type="number" id="qtarP" name="qtarP" 
+                                placeholder="Qtd de Ar Condicionado">
+                            </div>
+                        </div>
+                        <input type="checkbox" id="checkArMedio" onclick="toggleArMedio()">Médio
+                        <label for="arM" id="txarM" class='arCondicionado'>Ar condicionado (médio)</label>
+                        <div class="input">
+                            <div>
+                                <input type="number" id="arM" name="arM" 
+                                    placeholder="Qtd por dia (Horas)">
+                            </div>
+                            <div>  
+                                <input type="number" id="qtarM" name="qtarM" 
+                                    placeholder="Qtd de Ar Condicionado">
+                            </div>
+                        </div>
+                        <input type="checkbox" id="checkArGrande" onclick="toggleArGrand()">Grande
+                        <label for="arG" id="txarG" class='arCondicionado'>Ar condicionado (grande)</label>
+                        <div class="input">
+                            <div>
+                                <input type="number" id="arG" name="arG" 
+                                    placeholder="Qtd por dia (Horas)">
+                            </div>
+                            <div>  
+                                <input type="number" id="qtarg" name="qtarG" 
+                                    placeholder="Qtd de Ar Condicionado">
+                            </div>
+                        </div>                  
+                    </div>
+                </div>
+                <div id="residuos" class="residuos">
+                    <h3>Resíduos</h3>
+                    <label type="text" id="ckeckComb" class="comb">Seleciona os tipos resíduos</label>
+                    <div>
+                        <div>
+                            <input type="checkbox" id="checkSolidos" onclick="toggleSolidos()">Solídos
+                            <div class="input">
+                                <div>
+                                    <label for="txRsSolidos" id="txRsSolidos">Resíduos solídos</label>
+                                    <input type="number" id="RsSolidos" name="RsSolidos" 
+                                        placeholder="Qtd de resíduos (kg/dia)">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="checkOrganicos" onclick="toggleOrganicos()">Organicos
+                            <div class="input">
+                                <div>
+                                    <label for="txRsOrganicos" id="txRsOrganicos">Resíduos orgânicos</label>
+                                    <input type="number" id="RsOrganicos" name="RsOrganicos" 
+                                        placeholder="Qtd de resíduos (kg/dia)">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="checkEletronicos" onclick="toggleEletronicos()">Eletronicos
+                            <div class="input">
+                                <div>
+                                    <label for="txRsEletronicos" id="txRsEletronicos">Resíduos Eletrônicos</label>
+                                    <input type="number" id="RsEletronicos" name="RsEletronicos" 
+                                        placeholder="Qtd de resíduos (kg/dia)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="efluentes" class="efluentes">
+                    <h3>Efluentes</h3>
+                    <label type="text" id="ckeckComb" class="comb">Seleciona os tipos Efluentes</label>
+                    <div>
+                        <div>
+                            <input type="checkbox" id="checkAgricola" onclick="toggleAgricola()">Agricola
+                            <div class="input">
+                                <div>
+                                    <label for="txEfAricola" id="txEfAricola">Efluentes Agricola</label>
+                                    <input type="number" id="EfAgricola" name="EfAgricola" 
+                                       placeholder="Qtd de efluentes (kg/dia)">
+                                </div>
+                            </div>
+                            <input type="checkbox" id="checkDomestico" onclick="toggleDomestico()">Organicos
+                            <div class="input">
+                                <div>
+                                    <label for="txEfDomestico" id="txEfDomestico">Efluentes Organicos</label>
+                                    <input type="number" id="EfDomestico" name="EfDomestico" 
+                                       placeholder="Qtd de efluentes (kg/dia)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="reducao">
+                <h2>Redução de Emissões</h2>
+                <h3>Eficiência Energética</h3>
+                <div>
+                    <div class="input">
+                        <div>
+                            <label for="txEquipamento" id="txEquipamento">Equipamentos Trocados</label>
+                            <input type="number" id="equipamento" name="equipamento"
+                                placeholder="Qtd de equipamentos substituido no ano">
+                        </div>
+                        <div>
+                            <label for="txIluminacao" id="txIluminacao">Lampada Trocadas</label>
+                            <input type="number" id="iluminacao" name="iluminacao"
+                                placeholder="Lampadas trocadas no ano">
+                        </div>
+                    </div>
+                    <h3>Fontes de Energia Renovável</h3>
+                    <div>
+                        <h3>Paineis solares</h3>
+                        <div class="input">
+                            <div>
+                                 <label for="txsolar" id="txSolar">Paineis solares</label>
+                                <input type="number" id="Psolar" name="Psolar"
+                                    placeholder="potencia dos paineis solares">
+                            </div>
+                            <div>
+                                <label for="txPico" id="txPico">Horas de Pico</label>
+                                <input type="number" id="Hsolar" name="Hsolar"
+                                    placeholder="horas de pico dos paineis solares">
+                            </div>
+                        </div>
+                        <h3>Energia Eolica</h3>
+                        <div class="input">
+                            <div>
+                                <label for="txEolica" id="txEolica">Energia eolica</label>
+                                <input type="number" id="Peolica" name="Peolica"
+                                    placeholder="potencia da turbina">
+                            </div>
+                            <div>
+                                <label>Capacidade</label>
+                                <input type="number" id="Ceolica" name="Ceolica"
+                                    placeholder="capacidade da turbina em %">
+                            </div>
+                            <div>
+                                <label>Horas de uso</label>
+                                <input type="number" id="Heolica" name="Heolica"
+                                    placeholder="horas por dia de Uso">
+                            </div>
+                        </div>
+                        <h3>Aquecimento de água solar</h3>
+                        <div class="input">
+                            <div>
+                                <label for="txAQtdlar">Energia utilizada</label>
+                                <input type="number" id="Csolar" name="Csolar"
+                                    placeholder="Qtd de energia utilizada para aquecer a água em KW">
+                            </div>
+                            <div>
+                                <label>Eficiencia do sistema</label>
+                                <input type="number" id="Esolar" name="Esolar"
+                                    placeholder="Qercentual de eficiencia do sistema">
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Compensação de Carbono</h3>
+                    <div>
+                        <div>
+                            <label for="txReflorestamento" id="txReflorestamento">Reflorestamento</label>
+                            <input type="number" id="Reflorestamento" name="Reflorestamento"
+                                placeholder="Nº de Hectares de Reflorestamento">
+                        </div>
+                    </div>
+                </div>
+                <!--
+                <h3>Transporte Sustentável</h3>
+                <label for="txCarEletrico" id="txCarEletrico">Carros Eletricos (em teste)</label>
+                <input type="number" id="CarEletrico" name="CarEletrico"
+                       placeholder="Nº de Carros Elétricos">
+                <label for="txTpPublico" id="txTpPublico">Transporte Publicos (em teste)</label>
+                <input type="number" id="TpPublico" name="TpPublico"
+                       placeholder="Qtd">
+                <label for="txCaminhada" id="txCaminhada">caminhada ou ciclismos (em teste)</label>
+                <input type="number" id="Caminhada" name="Caminhada"
+                       placeholder="Qtd">
+                <h3>Redução de Resíduos</h3>
+                <label for="txReciclagemPapel" id="txReciclagemPapel">Reciclagem de papel (em teste)</label>
+                <input type="number" id="ReciclagemPapel" name="Reciclagem"
+                       placeholder="Nº de Toneladas de Papel Recicladas">
+                <label for="txComp" id="txComp">Compostagem (em teste)</label>
+                <input type="number" id="Comp" name="Comp"
+                       placeholder="Qtd">
+                <label for="txPlast" id="txPlast">Redução de plastico (em teste)</label>
+                <input type="number" id="Plast" name="Plast"
+                       placeholder="Qtd">
+                <h3>Agricultura Sustentável</h3>
+                <label for="txAgricultura" id="txAgricultura">Agricultura Regenerativa (em teste)</label>
+                <input type="number" id="Agricultura" name="Agricultura"
+                       placeholder="Qtd">
+                <label for="txCarne" id="txCarne">Redução de carne (em teste)</label>
+                <input type="number" id="Carne" name="Carne"
+                       placeholder="Qtd">
+            -->
+            </div>
+            <button class="btn-default" type="submit">Calcular</button>
+        </div>
+    </form>
+    <script src="/static/pessoa/script.js" defer></script>
+</body>
+</html>

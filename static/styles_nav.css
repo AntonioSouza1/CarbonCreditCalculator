@@ -1,0 +1,74 @@
+header {
+    width: 100%;
+    padding: 28px 8%;
+    background-color: #333;
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #a8fd9a;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    height: auto;
+    z-index: 1000;
+
+}
+
+#navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+#navbar li {
+    gap: 60px;
+}
+
+#navbar a {
+    color: rgb(4, 131, 0);
+    text-decoration: none;
+    padding: 5px 10px;
+    font-weight: 600;
+}
+
+#navbar a:hover {
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+section {
+    padding: 50px;
+    height: 100vh;
+}
+
+#inicio {
+    background-color: #f4f4f4;
+}
+#calculadora{
+    background-color: #f4f4f4;
+}
+#sobre {
+    background-color: #e2e2e2;
+}
+@media screen and (max-width: 1700px){
+    #navbar{
+        display: flex;
+        flex-direction: column;
+        gap: 12;
+        align-items: center;
+        text-align: center;
+    }
+    #navbar li {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+    }
+}

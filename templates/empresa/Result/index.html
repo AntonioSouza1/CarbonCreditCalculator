@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/empresa/Result/style.css">
+    <title>Resultado Empresa</title>
+</head>
+<body>
+    <div id="navbar">
+        <h2>Resultados</h2>
+    </div>
+    <div class="fundo">
+        <div class="fundoE">
+            <p>Empresa: {{ nome_empresa }}</p>
+            <p>Endereço: {{ endereco_empresa }}</p>
+            <p>Nome Responsável: {{ nomeResponsavel_empresa }}</p>
+            <p>Telefone Responsável: {{ telefoneResponsavel_empresa }}</p>
+            <p>Ano Inventariado: {{ ano_inventariado }}</p>
+            <p>Ramo: {{ ramo_empresa }}</p>
+        </div>
+        <div class="fundoR">
+            <h1>Emissões Totais de CO2: {{ Remissao }} Toneladas </h1>
+            <h1>Emissões Após Redução CO2: {{ Reducao }} Toneladas</h1>
+            <h1>Credito de carbono: {{ Rcredito }}</h1>
+            <p>Os dados foram salvos na pasta resultados.</p>
+        </div>
+    </div>
+</body>
+</html>

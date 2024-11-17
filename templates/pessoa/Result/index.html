@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/pessoa/result/style.css">
+    <title>Resultado Pessoas</title>
+</head>
+<body>
+    <div id="navbar">
+        <h2>Resultados</h2>
+    </div>
+    <div class="fundo">
+        <div class="fundoE">
+            <p>Nome: {{ nome }}</p>
+            <p>Endereço: {{ endereco }}</p>
+            <p>Telefone Responsável: {{ telefone }}</p>
+            <p>Ano Inventariado: {{ ano_inventariado }}</p>
+        </div>
+        <div class="fundoR">
+            <h1>Emissões Totais de CO2: {{ Remissao }} Toneladas </h1>
+            <h1>Emissões Após Redução CO2: {{ Reducao }} Toneladas</h1>
+            <h1>Credito de carbono: {{ Rcredito }}</h1>
+            <p>Os dados foram salvos na pasta resultados.</p>
+        </div>
+    </div>
+</body>
+</html>
