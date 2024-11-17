@@ -29,9 +29,10 @@ def salvar_dados(tipoCalculo, Remissao, Rcredito, Rreducao):
     os.makedirs(pasta, exist_ok=True)
     if tipoCalculo == 1:
         nome = dadosPessoa["nome"]
+        data = dadosPessoa["data"] 
     else:
         nome = dadosEmpresa["nome"]
-    data = dadosPessoa["data"] 
+        data = dadosEmpresa["data"]     
     nome_arquivo = (f"{nome}_{data}.txt") 
     caminho = os.path.join(pasta, nome_arquivo)
     with open(caminho, 'w') as arquivo:
@@ -41,6 +42,7 @@ def salvar_dados(tipoCalculo, Remissao, Rcredito, Rreducao):
             arquivo.write(f"Endereço: {dadosPessoa['endereco']}\n") 
             arquivo.write(f"telefone: {dadosPessoa['telefone']}\n")
             arquivo.write(f"Ano Inventariado: {dadosPessoa['anoInventariado']}\n")
+            arquivo.write(f'Data: {dadosPessoa['data']}') 
             arquivo.write("\n")
         else:
             arquivo.write(f"Empresa: {dadosEmpresa['nome']}\n")
@@ -49,13 +51,13 @@ def salvar_dados(tipoCalculo, Remissao, Rcredito, Rreducao):
             arquivo.write(f"Telefone do Responsável: {dadosEmpresa['telefoneResponsavel']}\n")
             arquivo.write(f"Ano Inventariado: {dadosEmpresa['anoInventariado']}\n")
             arquivo.write(f"Ramo Empresa: {dadosEmpresa['ramoEmpresa']}\n")
+            arquivo.write(f'Data: {dadosEmpresa['data']}') 
             arquivo.write("\n")
                           
         arquivo.write(f'Total de emissão {Remissao}\n')
         arquivo.write(f'Total de redução {Rreducao}\n')
         arquivo.write(f'Total de credito {Rcredito}\n')
         arquivo.write("\n")
-        arquivo.write(f'Data: {dadosPessoa['data']}') 
 
 app = Flask(__name__)
 
@@ -93,6 +95,7 @@ def empresa():
         dadosEmpresa['endereco'] = request.form["endereco_empresa"] # Entrada do endereço da empresa via formulário
         dadosEmpresa['nomeResponsavel'] = request.form['nomeResponsavel_empresa'] # Entrada do nome do responsável pela empresa via formulário
         dadosEmpresa['telefoneResponsavel'] = request.form['telefoneResponsavel_empresa'] # Entrada do telefone do responsável pela empresa via formulário
+        dadosEmpresa['data'] = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         anoInventario = int(request.form['ano_inventariado'])
         if anoInventario == 0:
             dadosEmpresa['anoInventariado'] = 'Ano não selecionado'
@@ -306,7 +309,7 @@ def empresa():
                                telefoneResponsavel_empresa=dadosEmpresa['telefoneResponsavel'],
                                ano_inventariado=dadosEmpresa['anoInventariado'],
                                ramo_empresa=dadosEmpresa['ramoEmpresa'],
-                               Remissao=Remissao, Reducao=(f'{Rreducao:.2f}'), Rcredito=Rcredito)
+                               Remissao=Remissao, Reducao=Rreducao, Rcredito=Rcredito)
 
 if __name__ == '__main__':
     app.run(debug=True)
