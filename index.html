@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/styles_nav.css">
+    <link rel="stylesheet" href="/static/styles_home.css">
+    <link rel="stylesheet" href="/static/styles_menu.css">
+    <link rel="stylesheet" href="/static/styles_sobre.css">
+    <link rel="stylesheet" href="/static/styles_sobre_projeto.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <head>
+        <nav id="navbar">
+            <ul>
+                <li><a href="#home" onclick="scrollToSection('inicio')">Início</a></li>
+                <li><a href="#sobre" onclick="scrollToSection('sobre')">Sobre</a></li>
+                <li><a href="#menu" onclick="scrollToSection('menu')">Calculadora</a></li>
+                <li><a href="#sobre_projeto" onclick="scrollToSection('sobre')">Sobre o projeto</a></li>
+            </ul>
+        </nav>
+    </head>
+    <main>
+        <section id="home">
+            <div class="shape"></div>
+            <div id="cta">
+                <h1 class="title">
+                    Calculadora de credito de 
+                    <span>Carbono</span>
+                </h1>
+                
+                <p id="description">
+                    Avalie seu impacto ambiental com nosso cálculo de crédito de carbono.
+                </p>
+
+                <div id="cta_buttons">
+                    <a href="#menu" class="btn-default">
+                        Calcular
+                    </a>
+                </div>
+            </div>
+            <div id="banner">
+                <img src="/static/Imagens/meio_anbiente.jpg" alt="">
+            </div>
+        </section>
+        <section id="sobre">
+            <div id="text-sobre">
+                <h1>
+                    O Que São Créditos de Carbono?
+                </h1>
+                <p>
+                    Créditos de carbono são certificados que correspondem à redução ou remoção de uma tonelada métrica de CO₂ 
+                    ou outros gases de efeito estufa da atmosfera. Eles podem ser comprados ou vendidos por 
+                    empresas como parte de estratégias de compensação de carbono. 
+                    A compra de créditos de carbono permite que uma empresa compense suas próprias emissões ao financiar projetos 
+                    que reduzem ou capturam GEEs em outros lugares. Esses projetos podem incluir reflorestamento, 
+                    energia renovável, eficiência energética, entre outros.
+                </p>
+
+                <h1>
+                    Como Funciona a Calculadora de Crédito de Carbono?
+                </h1>
+                <p>
+                    Coleta de Dados: As empresas inserem dados sobre seu consumo de energia, viagens, produção de resíduos e outras atividades que geram emissões de GEE. <br>
+                    Cálculo das Emissões: A calculadora utiliza fatores de emissão específicos para cada tipo de atividade para calcular a quantidade total de GEE emitida. <br>
+                    Esses fatores indicam quanta emissão é gerada por unidade de consumo, como kg de CO₂ por kWh de eletricidade usada. <br>
+                    Estimação dos Créditos Necessários: Com base nas emissões calculadas, a ferramenta estima quantos créditos de carbono a empresa  <br>
+                    precisaria comprar para compensar suas emissões.
+                </p>
+
+                <h1>
+                    Benefícios de Usar uma Calculadora de Crédito de Carbono
+                </h1>
+                <p>
+                    Gestão de Impacto Ambiental: Ajuda as empresas a identificar suas maiores fontes de emissões e a tomar medidas para reduzi-las. <br>
+                    Transparência e Relatórios: Fornece dados precisos que podem ser usados em relatórios de sustentabilidade e para cumprir regulamentações ambientais. <br>
+                    Vantagem Competitiva: Empresas que gerenciam bem suas emissões podem melhorar sua reputação e atrair consumidores e investidores conscientes do impacto ambiental. <br>
+                    Contribuição para a Sustentabilidade: Ao comprar créditos de carbono, as empresas financiam projetos que ajudam a mitigar as mudanças climáticas globalmente.
+                </p>
+
+                <h1>
+                    Exemplos de Projetos de Compensação:
+                </h1>
+                <P>
+                    Reflorestamento: Plantio de árvores que absorvem CO₂ da atmosfera.<br>
+                    Energia Renovável: Investimento em projetos de energia solar, eólica ou hidrelétrica que substituem fontes de energia fóssil.<br>
+                    Eficiência Energética: Implementação de tecnologias que reduzem o consumo de energia e, consequentemente, as emissões de GEE.
+                </P>
+            </div>
+            <div class="banner_sobre">
+                <img src="/static/Imagens/co2.jpg" alt="">
+            </div>
+        </section>
+        <section id="menu">
+            <div id="empresa">
+                <h2 class="title-menu">
+                    Para empresas
+                </h2>
+                <div class="texto-menu">
+                    <span class="empresa-description">Uma calculadora de crédito de carbono é uma ferramenta que ajuda as empresas a 
+                        estimarem as suas emissões de gases de efeito estufa (GEE), como o CO₂, e a calcular a 
+                        quantidade de créditos de carbono que elas precisariam comprar ou vender para compensar essas emissões.
+                        Créditos de carbono são certificados que representam a redução ou a captura de uma tonelada métrica de CO₂ 
+                        ou outros gases de efeito estufa. Empresas podem comprar esses créditos para compensar as suas próprias emissões.
+                    </span>
+                    <div class="banner_menu">
+                        <img src="/static/Imagens/empresa.jpg" alt="">
+                    </div>
+                </div>
+                <div class="btn_menu">
+                    <button class="btn-default" onclick="window.location.href='{{url_for('empresa_index') }}'">Ir para calculadora</button>
+                </div>
+            </div>
+            <div id="pessoa">
+                <h2 class="title-menu">
+                    Para pessoas
+                </h2>
+                <div class="texto-menu">
+                    <span class="empresa-description">Uma calculadora de crédito de carbono para pessoas 
+                        funciona de maneira similar à de empresas, mas com foco nas atividades individuais e 
+                        no impacto ambiental pessoal. Ela ajuda a estimar a pegada de carbono de uma pessoa, ou seja, a 
+                        quantidade de gases de efeito estufa (GEE) que ela emite por suas ações diárias. A partir desse cálculo, a 
+                        pessoa pode entender melhor como suas atividades contribuem para as mudanças climáticas e quantos créditos de carbono seriam 
+                        necessários para compensar essas emissões.
+                    </span>
+                    <div class="banner_menu">
+                        <img src="/static/Imagens/pessoa.jpg" alt="">
+                    </div>
+                </div>
+                <div class="btn_menu">
+                    <button class="btn-default" onclick="window.location.href='{{url_for('pessoa_index') }}'">Ir para calculadora</button>
+                </div>
+            </div>
+        </section>
+        <section id="sobre_projeto">
+            <h1>Sobre o projeto</h1>
+            <p id="aps">
+                APS - Atividades Práticas Supervisionadas <br>
+                Linguagem utilizada para processamento dos dados: Python
+            </p>
+            <h2 id="tx_criador">Integrantes</h2>
+            <div id="criador">
+                <div>
+                    <p>R126EF6 - Antonio Everton Souza Pinheiro</p>
+                    <p>G988086 - Ramon bretas de Amorin</p>
+                    <p>G9059D1 - Ricardo de souza</p>
+                    <p>Desenvolvimento de uma calculadora de Carbono: uma ferramenta para a neutralização climáticas</p>
+                </div>
+                <div>
+                    <h2>Projeto no GitHub</h2>
+                    <a href="https://github.com/AntonioSouza1/CarbonCreditCalculator">CarbonCreditCalculator</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
